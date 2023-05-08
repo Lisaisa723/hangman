@@ -91,3 +91,43 @@ void displayCells(const int& n)
     mvprintw(10, 2, "%s", top.c_str());
     mvprintw(11, 2, "%s|", cells.c_str());
 }
+void printWord(
+        bool& letterGuessed,
+        const int& wordLength,
+        const int& key,
+        const string& hiddenWord,
+        string& guessedWord)
+{
+    for (int index = 0, CharacterPos = 3; index < wordLength;
+         index++, CharacterPos += 2) {
+        if ((char)key == hiddenWord[index]) {
+            guessedWord[index] = hiddenWord[index];
+            letterGuessed = true;
+            mvprintw(11, CharacterPos, "%c", hiddenWord[index]);
+            if (guessedWord == hiddenWord) {
+                winLoseMessage(true);
+            }
+        }
+    }
+}
+void playGame()
+{
+    initscr();
+    noecho();
+    curs_set(0);
+    string hiddenWord = getRandomWord("words.txt");
+    int wordLength = (int)hiddenWord.size();
+    string guessedWord(wordLength, ' ');
+    int key, mistakes = 0;
+    displayCells(wordLength);
+    displayHangman(mistakes);
+    while ((key = getch()) != 27) {
+        bool letterGuessed = false;
+        printWord(letterGuessed, wordLength, key, hiddenWord, guessedWord);
+        if (not letterGuessed) {
+            mistakes++;
+        }
+        displayHangman(mistakes);
+    }
+    endwin();
+}
