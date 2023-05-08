@@ -1,0 +1,9 @@
+#application
+bin/*
+!bin/.keep
+
+#assembly artifacts
+obj/*
+!obj/.keep
+!obj/src/.keep
+!obj/test/.keep
