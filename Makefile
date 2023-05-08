@@ -1,6 +1,7 @@
 .PHONY: all format clean run test
 
 COMPILE_OPTIONS=-Wall -Werror
+COMPILE_LINK_FLAGS=-lncurses
 
 #directories
 OBJ=obj
@@ -19,9 +20,10 @@ all: format bin/hangman bin/test_hangman
 
 #application
 bin/hangman: $(OBJECTS)
-	$(CXX) $(COMPILE_OPTIONS) $^ -o $@
+	$(CXX) $(COMPILE_OPTIONS) $^ -o $@ $(COMPILE_LINK_FLAGS)
 
 obj/src/%.o: src/%.cpp
+	$(shell mkdir -p ./obj/src/hangman)
 	$(CXX) $(COMPILEFLAGS) -I src -c $< -o $@
 
 #test
@@ -35,10 +37,10 @@ format:
 	find . -type f -name '*.cpp' -o -name '*.h' | xargs clang-format -i
 
 clean:
-	cd obj && find . ! -name '.keep' -type f | xargs rm -f
-	cd obj && find . -type d -empty | xargs rm -f
-	cd bin && find . ! -name '.keep' -type f | xargs rm -f
-	cd bin && find . -type d -empty | xargs rm -f
+	cd obj && find . ! -name '.keep' -type f | xargs rm -rf
+	cd obj && find . -type d -empty | xargs rm -rf
+	cd bin && find . ! -name '.keep' -type f | xargs rm -rf
+	cd bin && find . -type d -empty | xargs rm -rf
 
 run:
 	cd bin && ./hangman
