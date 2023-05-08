@@ -18,20 +18,39 @@ string getRandomWord(const string& filename)
     return words[distribution(generator)];
 }
 
-void displayHangman()
+void displayHangman(const int& mistakes)
 {
-    mvprintw(
-            0,
-            1,
-            "________    \n"
-            "|       |   \n"
-            "|           \n"
-            "|           \n"
-            "|           \n"
-            "|           \n"
-            "|_____      \n"
-            "|     |___  \n"
-            "|_________| \n");
+    if (mistakes == 0) {
+        mvprintw(
+                0,
+                1,
+                "________    \n"
+                "|       |   \n"
+                "|           \n"
+                "|           \n"
+                "|           \n"
+                "|           \n"
+                "|_____      \n"
+                "|     |___  \n"
+                "|_________| \n");
+    }
+    switch (mistakes) {
+    case 6:
+        mvprintw(4, 9, "\\");
+    case 5:
+        mvprintw(4, 7, "/");
+    case 4:
+        mvprintw(3, 9, "\\");
+    case 3:
+        mvprintw(3, 7, "/");
+    case 2:
+        mvprintw(3, 8, "|");
+    case 1:
+        mvprintw(2, 8, "o");
+    }
+    if (mistakes == 6) {
+        winLoseMessage(false);
+    }
 }
 
 void winLoseMessage(const bool& isWin)

@@ -9,7 +9,7 @@
 
 using namespace std;
 
-void displayHangman();
+void displayHangman(const int& mistakes);
 void winLoseMessage(const bool& isWin);
 string getRandomWord(const string& filename);
 void displayCells(const int& n);
