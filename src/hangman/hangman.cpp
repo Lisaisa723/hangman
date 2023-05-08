@@ -6,6 +6,9 @@ string getRandomWord(const string& filename)
     vector<string> words;
     string line;
     ifstream in(filename);
+    if (not in.is_open() or in.bad()) {
+        throw runtime_error("Can not open file!");
+    }
     while (in >> line) {
         words.push_back(line);
     }
