@@ -7,6 +7,8 @@
 #include <random>
 #include <vector>
 
+using namespace std;
+
 void displayHangman();
 void winLoseMessage(const bool& isWin);
 string getRandomWord(const string& filename);
