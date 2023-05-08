@@ -1,5 +1,4 @@
 #include "hangman.h"
-using namespace std;
 
 string getRandomWord(const string& filename)
 {
