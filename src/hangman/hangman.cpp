@@ -18,6 +18,7 @@ string getRandomWord(const string& filename)
     uniform_int_distribution<unsigned long> distribution(0, words.size() - 1);
     return words[distribution(generator)];
 }
+
 void displayHangman()
 {
     mvprintw(
@@ -33,6 +34,7 @@ void displayHangman()
             "|     |___  \n"
             "|_________| \n");
 }
+
 void winLoseMessage(const bool& isWin)
 {
     clear();
@@ -59,4 +61,15 @@ void winLoseMessage(const bool& isWin)
     getch();
     endwin();
     exit(0);
+}
+
+void displayCells(const int& n)
+{
+    string cells, top;
+    for (int i = 0; i < n; i++) {
+        top += " _";
+        cells += "|_";
+    }
+    mvprintw(10, 2, "%s", top.c_str());
+    mvprintw(11, 2, "%s|", cells.c_str());
 }
