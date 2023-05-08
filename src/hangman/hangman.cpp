@@ -1,5 +1,23 @@
 #include "hangman.h"
+using namespace std;
 
+string getRandomWord(const string& filename)
+{
+    vector<string> words;
+    string line;
+    ifstream in(filename);
+    if (not in.is_open() or in.bad()) {
+        throw runtime_error("Can not open file!");
+    }
+    while (in >> line) {
+        words.push_back(line);
+    }
+    in.close();
+    random_device device;
+    mt19937 generator(device());
+    uniform_int_distribution<unsigned long> distribution(0, words.size() - 1);
+    return words[distribution(generator)];
+}
 void displayHangman()
 {
     mvprintw(
