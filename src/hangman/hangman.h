@@ -9,5 +9,7 @@
 
 void displayHangman();
 void winLoseMessage(const bool& isWin);
+string getRandomWord(const string& filename);
+void displayCells(const int& n);
 
 #endif
