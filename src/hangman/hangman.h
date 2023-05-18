@@ -5,6 +5,7 @@
 #include <iostream>
 #include <ncurses.h>
 #include <random>
+#include <string>
 #include <vector>
 
 using namespace std;
@@ -19,6 +20,7 @@ void printWord(
         const int& key,
         const string& hiddenWord,
         string& guessedWord);
+void displayMissingLetters(const string& missingLetters);
 void playGame();
 
 #endif

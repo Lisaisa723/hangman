@@ -110,12 +110,20 @@ void printWord(
         }
     }
 }
+void displayMissingLetters(const string& missingLetters)
+{
+    mvprintw(12, 2, "Missing Letters: ");
+    for (char letter : missingLetters) {
+        printw("%c  ", letter);
+    }
+}
 void playGame()
 {
     initscr();
     noecho();
     curs_set(0);
     string hiddenWord = getRandomWord("words.txt");
+    string missingLetters(6, ' ');
     int wordLength = (int)hiddenWord.size();
     string guessedWord(wordLength, ' ');
     int key, mistakes = 0;
@@ -125,8 +133,12 @@ void playGame()
         bool letterGuessed = false;
         printWord(letterGuessed, wordLength, key, hiddenWord, guessedWord);
         if (not letterGuessed) {
-            mistakes++;
+            if (missingLetters.find((char)key) == string::npos) {
+                missingLetters[mistakes] = (char)key;
+                mistakes++;
+            }
         }
+        displayMissingLetters(missingLetters);
         displayHangman(mistakes);
     }
     endwin();
