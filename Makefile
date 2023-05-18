@@ -28,8 +28,8 @@ obj/src/%.o: src/%.cpp
 	$(CXX) $(COMPILEFLAGS) -I src -c $< -o $@
 
 #test
-bin/test_hangman: $(TEST_OBJECTS)
-	$(CXX) $(COMPILEFLAGS) $^ -o $@
+bin/test_hangman: $(TEST_OBJECTS) $(SRC)/hangman/hangman.cpp
+	$(CXX) $(COMPILEFLAGS) $^ -o $@ $(COMPILE_LINK_FLAGS)
 
 obj/test/%.o: test/%.cpp
 	$(CXX) $(COMPILEFLAGS) -I src -I thirdparty -c $< -o $@
