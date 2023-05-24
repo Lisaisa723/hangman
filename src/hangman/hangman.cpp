@@ -1,5 +1,22 @@
 #include "hangman.h"
-
+void validateWord(const string& testWord)
+{
+    unsigned char code;
+    for (char letter : testWord) {
+        code = (unsigned char)letter;
+        if (code > 96 and code < 123) {
+            continue;
+        } else if (code > 47 and code < 58) {
+            throw runtime_error("There are number in the word!");
+        } else if (code > 64 and code < 91) {
+            throw runtime_error("There are capital letter in the word!");
+        } else if (
+                (code > 32 and code < 48) or (code > 57 and code < 65)
+                or (code > 90 and code < 97) or (code > 122 and code < 126)) {
+            throw runtime_error("There are symbol in the word!");
+        }
+    }
+}
 string getRandomWord(const string& filename)
 {
     vector<string> words;
@@ -9,6 +26,7 @@ string getRandomWord(const string& filename)
         throw runtime_error("Can not open file!");
     }
     while (in >> line) {
+        validateWord(line);
         words.push_back(line);
     }
     in.close();
