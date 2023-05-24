@@ -21,6 +21,7 @@ void printWord(
         const string& hiddenWord,
         string& guessedWord);
 void displayMissingLetters(const string& missingLetters);
+void doNotRecountMistake(string& missingLetters, const int& key, int& mistakes);
 void playGame();
 
 #endif

@@ -59,3 +59,23 @@ TEST_CASE("Symbol in the word", "[validateWord]")
     }
     REQUIRE(errorMessage == "There are symbol in the word!");
 }
+
+TEST_CASE("The error has not been committed yet", "[doNotRecountMistake]")
+{
+    std::string missingLetters = " ";
+    int mistakes = 0;
+    doNotRecountMistake(missingLetters, 'a', mistakes);
+    REQUIRE(missingLetters.size() == 1);
+    REQUIRE(missingLetters[0] == 'a');
+    REQUIRE(mistakes == 1);
+}
+
+TEST_CASE("The error has been committed", "[doNotRecountMistake]")
+{
+    std::string missingLetters = "a";
+    int mistakes = 1;
+    doNotRecountMistake(missingLetters, 'a', mistakes);
+    REQUIRE(missingLetters.size() == 1);
+    REQUIRE(missingLetters[0] == 'a');
+    REQUIRE(mistakes == 1);
+}
