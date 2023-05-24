@@ -9,7 +9,7 @@
 #include <vector>
 
 using namespace std;
-
+void validateWord(const string& testWord);
 void displayHangman(const int& mistakes);
 void winLoseMessage(const bool& isWin);
 string getRandomWord(const string& filename);
