@@ -135,6 +135,13 @@ void displayMissingLetters(const string& missingLetters)
         printw("%c  ", letter);
     }
 }
+void doNotRecountMistake(string& missingLetters, const int& key, int& mistakes)
+{
+    if (missingLetters.find((char)key) == string::npos) {
+        missingLetters[mistakes] = (char)key;
+        mistakes++;
+    }
+}
 void playGame()
 {
     initscr();
@@ -151,10 +158,7 @@ void playGame()
         bool letterGuessed = false;
         printWord(letterGuessed, wordLength, key, hiddenWord, guessedWord);
         if (not letterGuessed) {
-            if (missingLetters.find((char)key) == string::npos) {
-                missingLetters[mistakes] = (char)key;
-                mistakes++;
-            }
+            doNotRecountMistake(missingLetters, key, mistakes);
         }
         displayMissingLetters(missingLetters);
         displayHangman(mistakes);
